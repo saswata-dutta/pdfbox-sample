@@ -4,16 +4,15 @@
 package pdfbox.sample;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class App {
 
   public static void main(String[] args) throws IOException {
     setupFlags();
-    byte[] input = Files.readAllBytes(Paths.get(args[0]));
-    System.out.println(input.length);
-    ColorTextStripper.processPdf(input);
+    //    byte[] input = Files.readAllBytes(Paths.get(args[0]));
+    //    System.out.println(input.length);
+    //    ColorTextStripper.processPdf(input);
+    DrawPrintTextLocations.processPdf(args[0]);
   }
 
   private static void setupFlags() {
