@@ -12,7 +12,7 @@ public class App {
     //    byte[] input = Files.readAllBytes(Paths.get(args[0]));
     //    System.out.println(input.length);
     //    ColorTextStripper.processPdf(input);
-    DrawPrintTextLocations.processPdf(args[0]);
+    DrawStringLocations.processPdf(args[0]);
   }
 
   private static void setupFlags() {
