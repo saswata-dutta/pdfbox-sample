@@ -4,19 +4,26 @@
 package pdfbox.sample;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class App {
 
   public static void main(String[] args) throws IOException {
     setupFlags();
-    //    byte[] input = Files.readAllBytes(Paths.get(args[0]));
-    //    System.out.println(input.length);
-    //    ColorTextStripper.processPdf(input);
-    DrawStringLocations.processPdf(args[0]);
+    byte[] input = Files.readAllBytes(Paths.get(args[0]));
+    System.out.println(input.length);
+    List<List<TextRun>> pagedTextRuns = TextRunStripper.processPdf(input);
+    printTextRuns(pagedTextRuns);
   }
 
   private static void setupFlags() {
     System.setProperty("sun.java2d.cmm", "sun.java2d.cmm.kcms.KcmsServiceProvider");
     System.setProperty("org.apache.pdfbox.rendering.UsePureJavaCMYKConversion", "true");
+  }
+
+  private static void printTextRuns(List<List<TextRun>> pagedTextRuns) {
+    pagedTextRuns.forEach(textRuns -> textRuns.forEach(t -> System.out.println(t.text)));
   }
 }
