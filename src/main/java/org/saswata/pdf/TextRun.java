@@ -1,4 +1,4 @@
-package pdfbox.sample;
+package org.saswata.pdf;
 
 import java.awt.geom.Rectangle2D;
 import org.apache.pdfbox.pdmodel.font.PDFont;

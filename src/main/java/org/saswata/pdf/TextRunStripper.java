@@ -1,4 +1,4 @@
-package pdfbox.sample;
+package org.saswata.pdf;
 
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
@@ -156,10 +156,11 @@ public class TextRunStripper extends PDFTextStripper {
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
-    if (bounds.size() > 0) {
+    String text = string.trim();
+    if (bounds.size() > 0 && text.length() > 0) {
       textRuns.add(
           new TextRun(
-              string,
+              text,
               union(bounds),
               strokingColor.get(textPositions.get(0)),
               nonStrokingColor.get(textPositions.get(0)),
@@ -200,7 +201,9 @@ public class TextRunStripper extends PDFTextStripper {
       s = flipAT.createTransformedShape(s);
       s = rotateAT.createTransformedShape(s);
 
-      return s.getBounds2D();
+      Rectangle2D box = s.getBounds2D();
+      if (box.isEmpty() || box.getWidth() <= 0 || box.getHeight() <= 0) return null;
+      else return box;
     } catch (IOException e) {
       e.printStackTrace();
       return null;
